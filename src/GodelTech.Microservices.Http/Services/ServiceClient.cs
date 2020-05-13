@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GodelTech.Microservices.Core.Exceptions;
+using CollaborationException = GodelTech.Microservices.Http.Exceptions.CollaborationException;
 
 namespace GodelTech.Microservices.Http.Services
 {
