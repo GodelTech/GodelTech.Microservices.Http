@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>GodelTech.Microservices.Http</PackageId>
+    <PackageTags>.netcore netcore microservice</PackageTags>
+    <Copyright>Godel Technologies Europe</Copyright>
+    <Product>Microservice Platform</Product>
+    <Company>Godel Technologies Europe</Company>
+    <PackageIconUrl>https://www.gravatar.com/avatar/839234621070de51e7b9cabd5ceee8fe?s=64</PackageIconUrl>
+    <Authors>Andrei Salanoi</Authors>
+    <RepositoryUrl>https://github.com/GodelTech/GodelTech.Microservices.Http</RepositoryUrl>
+    <VersionPrefix>1.0.0</VersionPrefix>
+
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{00000000-0000-0000-0000-000000000001}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodelTech.Microservices.Core" Version="1.0.4" />
+  </ItemGroup>
+</Project>
