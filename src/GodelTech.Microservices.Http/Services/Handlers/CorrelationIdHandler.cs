@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GodelTech.Microservices.Core.Mvc.Middlewares;
 using GodelTech.Microservices.Core.Services;
 
 namespace GodelTech.Microservices.Http.Services.Handlers
@@ -20,8 +21,7 @@ namespace GodelTech.Microservices.Http.Services.Handlers
             var correlationId = _correlationIdAccessor.GetCorrelationId();
 
             if (!string.IsNullOrWhiteSpace(correlationId))
-                //request.Headers.Add(CorrelationIdMiddleware.CorrelationIdHeaderName, new[] { correlationId });
-                request.Headers.Add("X-Rie-Correlation-Id", new[] { correlationId });
+                request.Headers.Add(CorrelationIdMiddleware.CorrelationIdHeaderName, new[] { correlationId });
 
             return base.SendAsync(request, cancellationToken);
         }

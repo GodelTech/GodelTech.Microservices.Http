@@ -2,9 +2,8 @@
 using System.IO;
 using FakeItEasy;
 using FluentAssertions;
-using GodelTech.Microservices.Core.Collaborators;
-using GodelTech.Microservices.Core.Collaborators.ResponseHandlers;
-using GodelTech.Microservices.Core.Services;
+using GodelTech.Microservices.Http.Services;
+using GodelTech.Microservices.Http.Services.ResponseHandlers;
 using Xunit;
 
 namespace GodelTech.Microservices.Http.Tests.Services

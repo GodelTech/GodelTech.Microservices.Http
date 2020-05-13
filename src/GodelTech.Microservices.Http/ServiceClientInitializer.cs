@@ -27,6 +27,7 @@ namespace GodelTech.Microservices.Http
 
             services.AddHttpClient();
 
+            services.AddSingleton<IJsonSerializer, JsonSerializer>();
             services.AddSingleton<IServiceRegistry>(new ServiceRegistry(serviceConfigs));
             services.AddTransient<IServiceClientFactory, ServiceClientFactory>();
             services.AddTransient<IResponseHandlerFactory, ResponseHandlerFactory>();

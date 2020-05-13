@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
-using GodelTech.Microservices.Core.Collaborators.Handlers;
 using GodelTech.Microservices.Core.Services;
+using GodelTech.Microservices.Http.Services.Handlers;
 using Xunit;
 
 namespace GodelTech.Microservices.Http.Tests.Services.Handlers
