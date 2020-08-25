@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using GodelTech.Microservices.Core;
-using GodelTech.Microservices.Core.Services;
 using GodelTech.Microservices.Http.Services;
 using GodelTech.Microservices.Http.Services.Handlers;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +26,7 @@ namespace GodelTech.Microservices.Http
 
             services.AddHttpClient();
 
+            services.AddSingleton<IBearerTokenStorage, BearerTokenStorage>();
             services.AddSingleton<IJsonSerializer, JsonSerializer>();
             services.AddSingleton<IServiceRegistry>(new ServiceRegistry(serviceConfigs));
             services.AddTransient<IServiceClientFactory, ServiceClientFactory>();

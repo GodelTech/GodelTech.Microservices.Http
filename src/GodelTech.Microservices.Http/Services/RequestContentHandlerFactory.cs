@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using GodelTech.Microservices.Core.Services;
 using GodelTech.Microservices.Http.Services.RequestHandlers;
 
 namespace GodelTech.Microservices.Http.Services
