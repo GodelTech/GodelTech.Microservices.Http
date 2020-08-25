@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using GodelTech.Microservices.Core;
-using GodelTech.Microservices.Core.Services;
+using GodelTech.Microservices.Http.Middlewares;
 using GodelTech.Microservices.Http.Services;
 using GodelTech.Microservices.Http.Services.Handlers;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -27,6 +29,7 @@ namespace GodelTech.Microservices.Http
 
             services.AddHttpClient();
 
+            services.AddSingleton<IBearerTokenStorage, BearerTokenStorage>();
             services.AddSingleton<IJsonSerializer, JsonSerializer>();
             services.AddSingleton<IServiceRegistry>(new ServiceRegistry(serviceConfigs));
             services.AddTransient<IServiceClientFactory, ServiceClientFactory>();
@@ -40,6 +43,17 @@ namespace GodelTech.Microservices.Http
             {
                 AddServiceHttpClient(services, serviceName, serviceEndpoint);
             }
+        }
+
+        public override void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (app == null)
+                throw new ArgumentNullException(nameof(app));
+
+            if (env == null)
+                throw new ArgumentNullException(nameof(env));
+
+            app.UseMiddleware<AccessTokenMiddleware>();
         }
 
         private void AddServiceHttpClient(IServiceCollection services, string serviceName, IServiceConfig serviceEndpoint)

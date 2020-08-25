@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
-using GodelTech.Microservices.Core.Services;
 
 namespace GodelTech.Microservices.Http.Services.RequestHandlers
 {
