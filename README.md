@@ -1,15 +1,14 @@
 # GodeTech.Microservices.Http
 
-`GodeTech.Microservices.Http` is an advanced http client. It's a wrapper around the standard HttpClient [System.Net.Http](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient). The main idea of `GodeTech.Microservices.Http` is **to be able to receive data from any APIs in needed format: DTO, byte[], string, Stream**. `GodeTech.Microservices.Http` library allows to send GET, POST, DELETE, PUT requests.
+`GodeTech.Microservices.Http` is an advanced REST API client. It's a wrapper around the standard `HttpClient` [System.Net.Http](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient). Service client handles conversion of CRL objects into HTTP requests. E.g. developer should no longer spend time on serialization aod deserialization of DTOs into JSON. More time can be spend on business logic rather than communication infrastructure. `GodeTech.Microservices.Http` library supports `GET`, `POST`, `DELETE`, `PUT` requests.
 
 ## Quick Start
 
-### Source API
-For example, it is necessary to get data from a remote "RemoteWeatherReport" API. The API finds current weather for a town and returns it in special format `T`, where `T` is a serialized DTO class `WeatherReportDto`.
+### Demo REST API
 
-RemoteWeatherReport API endpoint: http://localhost:2020/v1/remote-weather-report?town=London
+Example is based on dummy `RemoteWeatherReport` REST API. This API provides information about current weather for specific town. Request results are converted into DTO `WeatherReportDto` by service client automatically.
 
-`RemoteWeatherReportController.cs`
+RemoteWeatherReport API endpoint can be found at  [http://localhost:2020/v1/remote-weather-report?town=London](http://localhost:2020/v1/remote-weather-report?town=London)
 
 ```csharp
 [ApiController]
@@ -35,7 +34,6 @@ public class RemoteWeatherReportController : ControllerBase
 
 **NOTE:** `_weatherReportService` is type of contarct `IWeatherReportService` returns weather information about the requested town.
 
-`WeatherReportDto.cs`
 ```csharp
 public class WeatherReportDto
 {
@@ -89,12 +87,15 @@ The `IServiceClientFactory` factory creates a service client. The service client
 ```json
 "ServiceEndpoints": {
   "RemoteWeatherReport": {
-    "BaseAddress": "http://localhost:2020"
+    "BaseAddress": "http://localhost:2020",
+    "ExcludeAccessToken" : true,
+    "Timeout" : "0:0:30"
   }
 }
 ```
 
 In the same way, we can get data like `byte[]` or `string`.
+
 ```csharp
 public async Task<string> GetStringAsync()
 {
@@ -110,12 +111,13 @@ public async Task<byte[]> GetFlagAsync()
     return await client.GetAsync<byte[]>("/v1/precipitations/img");
 }
 ```
-## Configuration Options
 
-Easiest way to configure factory `IServiceClientFactory` class. The following table contains list of available settings:
+## Service Client Creation Options
+
+`IServiceClientFactory` must be used to obtain instance of `IServiceClient`. Factory uses data from configuration section to initialize service client. The following parameters must be provided to `Create()` method of factory:
 
 | Property | Description |
 |---|---|
-| `ServiceName` | Title of a service client. Your need to add settings for the service to `appsettings.json` |
-| `ReturnDefaultOn404` | if value is `true` a service client returns object `T` without additional info. Default value is `false`. |
+| `ServiceName` | Name of a service client. You need to add settings for the service to `appsettings.json` |
+| `ReturnDefaultOn404` | If value is `false` and remote endpoint returns 404 HTTP status code exception is thrown by service client. In some cases 404 status code is expected value and `null` is assumed to be valid result of request. In order to return `null` instead of throwing exception `true` value must be specified. |
 
