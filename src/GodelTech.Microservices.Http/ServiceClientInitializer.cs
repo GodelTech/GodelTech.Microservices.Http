@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using GodelTech.Microservices.Core;
-using GodelTech.Microservices.Http.Middlewares;
 using GodelTech.Microservices.Http.Services;
 using GodelTech.Microservices.Http.Services.Handlers;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +36,6 @@ namespace GodelTech.Microservices.Http
             services.AddTransient<IRequestContentHandlerFactory, RequestContentHandlerFactory>();
 
             services.AddTransient<RequestResponseLoggingHandler>();
-            services.AddTransient<CorrelationIdHandler>();
 
             foreach (var (serviceName, serviceEndpoint) in serviceConfigs)
             {
@@ -87,7 +85,6 @@ namespace GodelTech.Microservices.Http
             // https://github.com/aspnet/Docs/issues/9306
 
             builder
-                .AddHttpMessageHandler<CorrelationIdHandler>()
                 .AddHttpMessageHandler(services => new BearerAccessTokenHandler(services.GetRequiredService<IBearerTokenStorage>(), serviceEndpoint.ExcludeAccessToken))
                 .AddPolicyHandler(request => request.Method == HttpMethod.Get || request.Method == HttpMethod.Head ? retryPolicy : noOp)
                 .AddHttpMessageHandler<RequestResponseLoggingHandler>();
