@@ -26,18 +26,6 @@ stages:
         targetType: inline
         script: >
           echo "##vso[task.setvariable variable=versionSuffix]ci-$BUILD_BUILDNUMBER"
-    - task: SonarCloudPrepare@1
-      displayName: Prepare analysis on SonarCloud
-      inputs:
-        SonarCloud: SonarCloud
-        organization: godeltech
-        scannerMode: MSBuild
-        projectKey: $(Build.DefinitionName)
-        projectName: $(Build.DefinitionName)
-        extraProperties: >
-          sonar.cs.opencover.reportsPaths="$(Agent.TempDirectory)/**/coverage.opencover.xml"
-
-          sonar.coverage.exclusions="tools/build/*"
     - task: UseDotNet@2
       displayName: Use .NET Core SDK 3.x
       inputs:
