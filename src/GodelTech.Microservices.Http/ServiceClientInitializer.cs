@@ -31,13 +31,14 @@ namespace GodelTech.Microservices.Http
 
             services.AddSingleton<IBearerTokenStorage, BearerTokenStorage>();
             services.AddSingleton<IJsonSerializer, JsonSerializer>();
+            services.AddSingleton<IBearerTokenStorage, BearerTokenStorage>();
             services.AddSingleton<IServiceRegistry>(new ServiceRegistry(serviceConfigs));
+
             services.AddTransient<IServiceClientFactory, ServiceClientFactory>();
             services.AddTransient<IResponseHandlerFactory, ResponseHandlerFactory>();
             services.AddTransient<IRequestContentHandlerFactory, RequestContentHandlerFactory>();
 
             services.AddTransient<RequestResponseLoggingHandler>();
-            services.AddTransient<CorrelationIdHandler>();
 
             foreach (var (serviceName, serviceEndpoint) in serviceConfigs)
             {
@@ -87,7 +88,6 @@ namespace GodelTech.Microservices.Http
             // https://github.com/aspnet/Docs/issues/9306
 
             builder
-                .AddHttpMessageHandler<CorrelationIdHandler>()
                 .AddHttpMessageHandler(services => new BearerAccessTokenHandler(services.GetRequiredService<IBearerTokenStorage>(), serviceEndpoint.ExcludeAccessToken))
                 .AddPolicyHandler(request => request.Method == HttpMethod.Get || request.Method == HttpMethod.Head ? retryPolicy : noOp)
                 .AddHttpMessageHandler<RequestResponseLoggingHandler>();
