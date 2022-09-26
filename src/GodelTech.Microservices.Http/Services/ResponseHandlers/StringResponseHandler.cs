@@ -11,7 +11,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
             if (typeof(T) != typeof(string))
                 throw new InvalidOperationException(nameof(StringResponseHandler) + " supports only string result type");
 
-            return (T)(object)(await response.Content.ReadAsStringAsync());
+            return (T) (object) await response.Content.ReadAsStringAsync();
         }
     }
 }

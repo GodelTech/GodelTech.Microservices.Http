@@ -11,7 +11,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
             if (response == null)
                 throw new ArgumentNullException(nameof(response));
 
-            return Task.FromResult((T)(object)response);
+            return Task.FromResult((T) (object) response);
         }
     }
 }

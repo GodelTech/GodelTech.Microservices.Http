@@ -21,7 +21,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
             var stringContent = await response.Content.ReadAsStringAsync();
 
             return string.IsNullOrWhiteSpace(stringContent) ?
-                default(T) :
+                default :
                 _jsonSerializer.Deserialize<T>(stringContent);
         }
     }

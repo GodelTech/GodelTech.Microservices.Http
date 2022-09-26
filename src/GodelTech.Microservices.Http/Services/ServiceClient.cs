@@ -74,7 +74,7 @@ namespace GodelTech.Microservices.Http.Services
                 CreateRequest(HttpMethod.Put, url, body));
         }
 
-        private HttpRequestMessage CreateRequest(HttpMethod method, string url, object body) 
+        private HttpRequestMessage CreateRequest(HttpMethod method, string url, object body)
         {
             return new HttpRequestMessage(method, url)
             {
@@ -84,8 +84,8 @@ namespace GodelTech.Microservices.Http.Services
 
         private HttpContent CreateContent(object body)
         {
-            return body == null ? 
-                null : 
+            return body == null ?
+                null :
                 _requestContentHandlerFactory.Create(body.GetType()).Create(body);
         }
 
@@ -94,13 +94,13 @@ namespace GodelTech.Microservices.Http.Services
             var result = await _client.SendAsync(request);
 
             if (result.StatusCode == HttpStatusCode.NotFound && ReturnDefaultOn404)
-                return default(T);
+                return default;
 
             if (!result.IsSuccessStatusCode)
             {
                 throw new CollaborationException($"Failed to process request. StatusCode={result.StatusCode}, Reason={result.ReasonPhrase}, Method={request.Method}, Url={request.RequestUri}")
                 {
-                    StatusCode = (int)result.StatusCode,
+                    StatusCode = (int) result.StatusCode,
                     ReasonPhrase = result.ReasonPhrase
                 };
             }

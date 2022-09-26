@@ -12,7 +12,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
             if (typeof(T) != typeof(Stream))
                 throw new InvalidOperationException(nameof(StreamResponseHandler) + " supports only Stream result type");
 
-            return (T)(object)(await response.Content.ReadAsStreamAsync());
+            return (T) (object) await response.Content.ReadAsStreamAsync();
         }
     }
 }

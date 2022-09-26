@@ -11,7 +11,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
             if (typeof(T) != typeof(byte[]))
                 throw new InvalidOperationException(nameof(ByteResponseHandler) + " supports only byte array result type");
 
-            return (T)(object)(await response.Content.ReadAsByteArrayAsync());
+            return (T) (object) await response.Content.ReadAsByteArrayAsync();
         }
     }
 }
