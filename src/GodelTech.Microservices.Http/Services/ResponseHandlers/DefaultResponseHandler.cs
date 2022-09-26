@@ -13,7 +13,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
             _jsonSerializer = jsonSerializer ?? throw new ArgumentNullException(nameof(jsonSerializer));
         }
 
-        public async Task<T> ReadContent<T>(HttpResponseMessage response)
+        public async Task<T> ReadContentAsync<T>(HttpResponseMessage response)
         {
             if (response == null)
                 throw new ArgumentNullException(nameof(response));

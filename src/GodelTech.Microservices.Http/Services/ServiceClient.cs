@@ -6,7 +6,7 @@ using CollaborationException = GodelTech.Microservices.Http.Exceptions.Collabora
 
 namespace GodelTech.Microservices.Http.Services
 {
-    public class ServiceClient : IServiceClient
+    public sealed class ServiceClient : IServiceClient
     {
         private readonly HttpClient _client;
         private readonly IRequestContentHandlerFactory _requestContentHandlerFactory;
@@ -44,7 +44,7 @@ namespace GodelTech.Microservices.Http.Services
                 CreateRequest(HttpMethod.Get, url, null));
         }
 
-        public Task<TResult> PostAsync<TResult>(string url, object body)
+        public Task<TResult> PostAsync<TResult>(string url, object body = null)
             where TResult : class
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -106,7 +106,7 @@ namespace GodelTech.Microservices.Http.Services
             }
 
             var handler = _responseHandlerFactory.Create(typeof(T));
-            return await handler.ReadContent<T>(result);
+            return await handler.ReadContentAsync<T>(result);
         }
 
         public void Dispose()

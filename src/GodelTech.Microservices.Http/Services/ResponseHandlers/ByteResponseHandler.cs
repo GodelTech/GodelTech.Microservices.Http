@@ -6,7 +6,7 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
 {
     public class ByteResponseHandler : IResponseHandler
     {
-        public async Task<T> ReadContent<T>(HttpResponseMessage response)
+        public async Task<T> ReadContentAsync<T>(HttpResponseMessage response)
         {
             if (typeof(T) != typeof(byte[]))
                 throw new InvalidOperationException(nameof(ByteResponseHandler) + " supports only byte array result type");

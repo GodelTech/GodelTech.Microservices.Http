@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace GodelTech.Microservices.Http.Exceptions
 {
+    [Serializable]
     public class CollaborationException : Exception
     {
         public int StatusCode { get; set; }
