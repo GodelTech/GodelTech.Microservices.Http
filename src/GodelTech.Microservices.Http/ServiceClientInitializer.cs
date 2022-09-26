@@ -30,7 +30,9 @@ namespace GodelTech.Microservices.Http
 
             services.AddSingleton<IBearerTokenStorage, BearerTokenStorage>();
             services.AddSingleton<IJsonSerializer, JsonSerializer>();
+            services.AddSingleton<IBearerTokenStorage, BearerTokenStorage>();
             services.AddSingleton<IServiceRegistry>(new ServiceRegistry(serviceConfigs));
+
             services.AddTransient<IServiceClientFactory, ServiceClientFactory>();
             services.AddTransient<IResponseHandlerFactory, ResponseHandlerFactory>();
             services.AddTransient<IRequestContentHandlerFactory, RequestContentHandlerFactory>();

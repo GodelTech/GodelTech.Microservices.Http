@@ -1,5 +1,4 @@
-﻿using GodelTech.Microservices.Core.Services;
-using System;
+﻿using System;
 using System.Threading;
 
 namespace GodelTech.Microservices.Http.Services
