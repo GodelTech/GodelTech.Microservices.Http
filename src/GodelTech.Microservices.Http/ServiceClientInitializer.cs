@@ -17,6 +17,7 @@ namespace GodelTech.Microservices.Http
     public class ServiceClientInitializer : MicroserviceInitializerBase
     {
         public int TransientErrorRetryCount { get; set; } = 3;
+        public bool IncludeAccessTokenMiddleware { get; set; }
 
         public ServiceClientInitializer(IConfiguration configuration)
             : base(configuration)
@@ -54,7 +55,8 @@ namespace GodelTech.Microservices.Http
             if (env == null)
                 throw new ArgumentNullException(nameof(env));
 
-            app.UseMiddleware<AccessTokenMiddleware>();
+            if (IncludeAccessTokenMiddleware)
+                app.UseMiddleware<AccessTokenMiddleware>();
         }
 
         private void AddServiceHttpClient(IServiceCollection services, string serviceName, IServiceConfig serviceEndpoint)
