@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using GodelTech.Microservices.Core;
+using GodelTech.Microservices.Http.Middlewares;
 using GodelTech.Microservices.Http.Services;
 using GodelTech.Microservices.Http.Services.Handlers;
 using Microsoft.AspNetCore.Builder;
