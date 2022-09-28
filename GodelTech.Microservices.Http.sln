@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GodelTech.Microservices.Http", "src\GodelTech.Microservices.Http\GodelTech.Microservices.Http.csproj", "{00000000-0000-0000-0000-000000000001}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F477CBD4-A328-41D0-BF15-95E5E6396DB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodelTech.Microservices.Http.Tests", "test\GodelTech.Microservices.Http.Tests\GodelTech.Microservices.Http.Tests.csproj", "{467E32D5-6305-48DF-AD1C-78E713FFF311}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{00000000-0000-0000-0000-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00000000-0000-0000-0000-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00000000-0000-0000-0000-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467E32D5-6305-48DF-AD1C-78E713FFF311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467E32D5-6305-48DF-AD1C-78E713FFF311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467E32D5-6305-48DF-AD1C-78E713FFF311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467E32D5-6305-48DF-AD1C-78E713FFF311}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{467E32D5-6305-48DF-AD1C-78E713FFF311} = {F477CBD4-A328-41D0-BF15-95E5E6396DB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3EA760D2-0CB6-4E4B-A58B-E968DF8043F4}
