@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace GodelTech.Microservices.Http.Exceptions
 {
+    [Serializable]
     public class CollaborationException : Exception
     {
         public int StatusCode { get; set; }
@@ -12,17 +13,17 @@ namespace GodelTech.Microservices.Http.Exceptions
         {
         }
 
-        public CollaborationException(string message) 
+        public CollaborationException(string message)
             : base(message)
         {
         }
 
-        public CollaborationException(string message, Exception innerException) 
+        public CollaborationException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected CollaborationException(SerializationInfo info, StreamingContext context) 
+        protected CollaborationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

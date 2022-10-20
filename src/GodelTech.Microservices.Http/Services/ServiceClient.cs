@@ -6,7 +6,7 @@ using CollaborationException = GodelTech.Microservices.Http.Exceptions.Collabora
 
 namespace GodelTech.Microservices.Http.Services
 {
-    public class ServiceClient : IServiceClient
+    public sealed class ServiceClient : IServiceClient
     {
         private readonly HttpClient _client;
         private readonly IRequestContentHandlerFactory _requestContentHandlerFactory;
@@ -44,7 +44,7 @@ namespace GodelTech.Microservices.Http.Services
                 CreateRequest(HttpMethod.Get, url, null));
         }
 
-        public Task<TResult> PostAsync<TResult>(string url, object body)
+        public Task<TResult> PostAsync<TResult>(string url, object body = null)
             where TResult : class
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -74,7 +74,7 @@ namespace GodelTech.Microservices.Http.Services
                 CreateRequest(HttpMethod.Put, url, body));
         }
 
-        private HttpRequestMessage CreateRequest(HttpMethod method, string url, object body) 
+        private HttpRequestMessage CreateRequest(HttpMethod method, string url, object body)
         {
             return new HttpRequestMessage(method, url)
             {
@@ -84,8 +84,8 @@ namespace GodelTech.Microservices.Http.Services
 
         private HttpContent CreateContent(object body)
         {
-            return body == null ? 
-                null : 
+            return body == null ?
+                null :
                 _requestContentHandlerFactory.Create(body.GetType()).Create(body);
         }
 
@@ -94,19 +94,19 @@ namespace GodelTech.Microservices.Http.Services
             var result = await _client.SendAsync(request);
 
             if (result.StatusCode == HttpStatusCode.NotFound && ReturnDefaultOn404)
-                return default(T);
+                return default;
 
             if (!result.IsSuccessStatusCode)
             {
                 throw new CollaborationException($"Failed to process request. StatusCode={result.StatusCode}, Reason={result.ReasonPhrase}, Method={request.Method}, Url={request.RequestUri}")
                 {
-                    StatusCode = (int)result.StatusCode,
+                    StatusCode = (int) result.StatusCode,
                     ReasonPhrase = result.ReasonPhrase
                 };
             }
 
             var handler = _responseHandlerFactory.Create(typeof(T));
-            return await handler.ReadContent<T>(result);
+            return await handler.ReadContentAsync<T>(result);
         }
 
         public void Dispose()

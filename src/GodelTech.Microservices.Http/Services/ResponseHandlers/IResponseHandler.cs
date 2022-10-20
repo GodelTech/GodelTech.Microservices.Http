@@ -5,6 +5,6 @@ namespace GodelTech.Microservices.Http.Services.ResponseHandlers
 {
     public interface IResponseHandler
     {
-        Task<T> ReadContent<T>(HttpResponseMessage response);
+        Task<T> ReadContentAsync<T>(HttpResponseMessage response);
     }
 }
