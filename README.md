@@ -122,6 +122,6 @@ public async Task<byte[]> GetFlagAsync()
 | `ServiceName` | Name of a service client. You need to add settings for the service to `appsettings.json` |
 | `ReturnDefaultOn404` | If value is `false` and remote endpoint returns 404 HTTP status code exception is thrown by service client. In some cases 404 status code is expected value and `null` is assumed to be valid result of request. In order to return `null` instead of throwing exception `true` value must be specified. |
 
-# License
+## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
