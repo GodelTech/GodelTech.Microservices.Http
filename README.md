@@ -1,6 +1,6 @@
 # GodeTech.Microservices.Http
 
-# Description
+## Description
 `GodeTech.Microservices.Http` is an advanced REST API client. It's a wrapper around the standard `HttpClient` [System.Net.Http](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient). Service client handles conversion of CRL objects into HTTP requests. E.g. developer should no longer spend time on serialization aod deserialization of DTOs into JSON. More time can be spend on business logic rather than communication infrastructure. `GodeTech.Microservices.Http` library supports `GET`, `POST`, `DELETE`, `PUT` requests.
 
 ## Quick Start
